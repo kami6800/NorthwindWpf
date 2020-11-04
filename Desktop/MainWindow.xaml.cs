@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,14 @@ namespace Desktop
     /// </summary>
     public partial class MainWindow : Window
     {
+        NorthwindContext context = new NorthwindContext();
         public MainWindow()
         {
             InitializeComponent();
+
+            Employees e = context.Employees.FirstOrDefault();
+            EmploymentTime ee = context.EmploymentTime.FirstOrDefault();
+            testBox.Text = ee.StartDate.ToString();
         }
     }
 }

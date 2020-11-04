@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Entities.Models
+namespace Desktop.Models
 {
     public partial class NorthwindContext : DbContext
     {
