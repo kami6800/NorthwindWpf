@@ -6,7 +6,30 @@
              xmlns:local="clr-namespace:Desktop.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="Red">
-            
+    <Grid>
+        <Grid.ColumnDefinitions>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="90*"/>
+        </Grid.RowDefinitions>
+        <DockPanel Margin="5">
+            <Button Content="Search" Padding="10 0" FontSize="16" DockPanel.Dock="Right"/>
+            <TextBox x:Name="searchBox" FontSize="16" VerticalContentAlignment="Center"/>
+        </DockPanel>
+        <DataGrid ItemsSource="{Binding EmployeeResults}" CanUserAddRows="False" AutoGenerateColumns="False" Grid.Row="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding EmployeeId}" Width="5*"/>
+                <DataGridTextColumn Header="Full name" Width="55*">
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding StringFormat="{}{0} {1}">
+                            <Binding Path="FirstName"/>
+                            <Binding Path="LastName"/>
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="40*"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>
