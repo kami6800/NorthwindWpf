@@ -2,8 +2,15 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Desktop"
+             xmlns:view="clr-namespace:Desktop.Views"
+             xmlns:viewmodel="clr-namespace:Desktop.ViewModels"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <DataTemplate DataType="{x:Type viewmodel:HRViewModel}">
+            <view:HRView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:OrdersViewModel}">
+            <view:OrdersView/>
+        </DataTemplate>
     </Application.Resources>
 </Application>

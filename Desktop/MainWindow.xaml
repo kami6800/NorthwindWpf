@@ -6,8 +6,20 @@
         xmlns:local="clr-namespace:Desktop"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <TextBox x:Name="testBox" HorizontalAlignment="Left" Margin="258,184,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+    <Grid Background="AliceBlue">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="80*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Background="LightSteelBlue">
+            <Button Command="{Binding UpdateView}" CommandParameter="HR" Content="HR" Margin="10" Padding="3" Background="LightBlue" FontSize="16" BorderThickness="2px" BorderBrush="AliceBlue"/>
+            <Button Command="{Binding UpdateView}" CommandParameter="Orders" Content="Orders" Margin="10" Padding="3" Background="LightBlue" FontSize="16" BorderThickness="2px" BorderBrush="AliceBlue"/>
+            <Button Content="Products" Margin="10" Padding="3" Background="LightBlue" FontSize="16" BorderThickness="2px" BorderBrush="AliceBlue"/>
+            <Button Content="Customers" Margin="10" Padding="3" Background="LightBlue" FontSize="16" BorderThickness="2px" BorderBrush="AliceBlue"/>
+            <Button Content="Suppliers" Margin="10" Padding="3" Background="LightBlue" FontSize="16" BorderThickness="2px" BorderBrush="AliceBlue"/>
+            <Button Content="Accounting" Margin="10" Padding="3" Background="LightBlue" FontSize="16" BorderThickness="2px" BorderBrush="AliceBlue"/>
+        </StackPanel>
 
+        <ContentControl Content="{Binding SelectedViewModel}" Grid.Column="1"/>
     </Grid>
 </Window>
