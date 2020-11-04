@@ -8,13 +8,13 @@ using System.Windows.Input;
 
 namespace Desktop.Commands
 {
-    public class UpdateViewCommand : ICommand
+    public class SelectEmployeeCommand : ICommand
     {
         Repository repository = new Repository();
         public event EventHandler CanExecuteChanged;
         public MainViewModel ViewModel { get; set; }
 
-        public UpdateViewCommand(MainViewModel mainViewModel)
+        public SelectEmployeeCommand(MainViewModel mainViewModel)
         {
             ViewModel = mainViewModel;
         }
@@ -26,15 +26,8 @@ namespace Desktop.Commands
 
         public void Execute(object parameter)
         {
-            switch(parameter as string)
-            {
-                case "HR":
-                    ViewModel.SelectedViewModel = new HRViewModel(ViewModel);
-                    break;
-                case "Orders":
-                    ViewModel.SelectedViewModel = new OrdersViewModel();
-                    break;
-            }
+            Employees employee = parameter as Employees;
+            ViewModel.SelectedViewModel = new EmployeeInformationViewModel(employee);
         }
     }
 }

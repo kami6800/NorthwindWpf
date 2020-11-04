@@ -11,13 +11,14 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"/>
-            <RowDefinition Height="90*"/>
+            <RowDefinition Height="80*"/>
+            <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
         <DockPanel Margin="5">
             <Button Content="Search" Padding="10 0" FontSize="16" DockPanel.Dock="Right"/>
             <TextBox x:Name="searchBox" FontSize="16" VerticalContentAlignment="Center"/>
         </DockPanel>
-        <DataGrid ItemsSource="{Binding EmployeeResults}" CanUserAddRows="False" AutoGenerateColumns="False" Grid.Row="1">
+        <DataGrid x:Name="searchGrid" ItemsSource="{Binding EmployeeResults}" CanUserAddRows="False" AutoGenerateColumns="False" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding EmployeeId}" Width="5*"/>
                 <DataGridTextColumn Header="Full name" Width="55*">
@@ -31,5 +32,6 @@
                 <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="40*"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Button Command="{Binding UpdateView}" CommandParameter="{Binding ElementName=searchGrid, Path=SelectedItem}" Content="Select" FontSize="16" Height="40px" Width="100px" Grid.Row="2"/>
     </Grid>
 </UserControl>

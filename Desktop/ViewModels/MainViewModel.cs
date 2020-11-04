@@ -8,7 +8,7 @@ namespace Desktop.ViewModels
     public class MainViewModel : BaseViewModel
     {
         public UpdateViewCommand UpdateView { get; set; }
-        private BaseViewModel _selectedViewModel = new HRViewModel();
+        private BaseViewModel _selectedViewModel;
         public BaseViewModel SelectedViewModel
         {
             get { return _selectedViewModel; }
@@ -20,6 +20,7 @@ namespace Desktop.ViewModels
 
         public MainViewModel()
         {
+            SelectedViewModel = new HRViewModel(this);
             UpdateView = new UpdateViewCommand(this);
         }
     }

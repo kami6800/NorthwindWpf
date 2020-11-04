@@ -1,4 +1,5 @@
 ﻿using DataAccess;
+using Desktop.Commands;
 using Entities.Models;
 using System;
 using System.Collections.Generic;
@@ -10,12 +11,16 @@ namespace Desktop.ViewModels
 {
     public class HRViewModel : BaseViewModel
     {
+        //private MainViewModel MainView { get; set; }
+        public SelectEmployeeCommand UpdateView { get; set; }
         private Repository repository = new Repository();
         private List<Employees> AllEmployees { get; set; }
         public ObservableCollection<Employees> EmployeeResults { get; set; }
 
-        public HRViewModel()
+        public HRViewModel(MainViewModel mainView)
         {
+            //MainView = mainView;
+            UpdateView = new SelectEmployeeCommand(mainView);
             AllEmployees = repository.GetAllEmployees();
             EmployeeResults = new ObservableCollection<Employees>(AllEmployees);
             Search("an");
