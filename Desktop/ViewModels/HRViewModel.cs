@@ -13,23 +13,33 @@ namespace Desktop.ViewModels
     {
         //private MainViewModel MainView { get; set; }
         public SelectEmployeeCommand UpdateView { get; set; }
+        public SearchCommand SearchEmployees { get; set; }
         private Repository repository = new Repository();
         private List<Employees> AllEmployees { get; set; }
-        public ObservableCollection<Employees> EmployeeResults { get; set; }
+        private ObservableCollection<Employees> _employeeResults;
+        public ObservableCollection<Employees> EmployeeResults
+        {
+            get { return _employeeResults; }
+            set
+            {
+                _employeeResults = value;
+                RaisePropertyChanged("EmployeeResults");
+            }
+        }
 
         public HRViewModel(MainViewModel mainView)
         {
             //MainView = mainView;
             UpdateView = new SelectEmployeeCommand(mainView);
+            SearchEmployees = new SearchCommand(Search);
             AllEmployees = repository.GetAllEmployees();
             EmployeeResults = new ObservableCollection<Employees>(AllEmployees);
-            Search("an");
+            //Search("an");
         }
 
         public void Search(string searched)
         {
             searched = searched.ToLower();
-
             List<Employees> results = new List<Employees>();
             results = AllEmployees.Where((x) => {
                 string initials = x.FirstName.ToLower().Substring(0, 2) + x.LastName.ToLower().Substring(0, 2);

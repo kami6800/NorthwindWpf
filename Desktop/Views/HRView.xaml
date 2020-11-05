@@ -15,7 +15,7 @@
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
         <DockPanel Margin="5">
-            <Button Content="Search" Padding="10 0" FontSize="16" DockPanel.Dock="Right"/>
+            <Button Command="{Binding SearchEmployees}" CommandParameter="{Binding ElementName=searchBox, Path=Text}" Content="Search" Padding="10 0" FontSize="16" DockPanel.Dock="Right"/>
             <TextBox x:Name="searchBox" FontSize="16" VerticalContentAlignment="Center"/>
         </DockPanel>
         <DataGrid x:Name="searchGrid" ItemsSource="{Binding EmployeeResults}" CanUserAddRows="False" AutoGenerateColumns="False" Grid.Row="1">
