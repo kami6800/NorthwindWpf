@@ -18,7 +18,7 @@
             <Button Command="{Binding SearchEmployees}" CommandParameter="{Binding ElementName=searchBox, Path=Text}" Content="Search" Padding="10 0" FontSize="16" DockPanel.Dock="Right"/>
             <TextBox x:Name="searchBox" FontSize="16" VerticalContentAlignment="Center"/>
         </DockPanel>
-        <DataGrid x:Name="searchGrid" ItemsSource="{Binding EmployeeResults}" CanUserAddRows="False" AutoGenerateColumns="False" Grid.Row="1">
+        <DataGrid x:Name="searchGrid" ItemsSource="{Binding EmployeeResults}" IsReadOnly="true" AutoGenerateColumns="False" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding EmployeeId}" Width="5*"/>
                 <DataGridTextColumn Header="Full name" Width="55*">

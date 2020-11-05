@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Desktop.Interfaces;
 
 namespace Entities.Models
 {
-    public partial class Employees
+    public partial class Employees : ObservableObject
     {
         public Employees()
         {
@@ -15,7 +16,16 @@ namespace Entities.Models
 
         public int EmployeeId { get; set; }
         public string LastName { get; set; }
-        public string FirstName { get; set; }
+        public string FirstName
+        {
+            get { return _firstName; }
+            set
+            {
+                _firstName = value;
+                RaisePropertyChanged("FirstName");
+            }
+        }
+        private string _firstName;
         public string Title { get; set; }
         public string TitleOfCourtesy { get; set; }
         public DateTime? BirthDate { get; set; }
