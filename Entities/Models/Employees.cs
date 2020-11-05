@@ -31,7 +31,19 @@ namespace Entities.Models
         public DateTime? BirthDate { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
-        public string Region { get; set; }
+        public string Region
+        {
+            get
+            {
+                return _region == null ? "Unknown region" : _region;
+            }
+            set
+            {
+                _region = value;
+                RaisePropertyChanged("Region");
+            }
+        }
+        private string _region;
         public string PostalCode { get; set; }
         public string Country { get; set; }
         public string HomePhone { get; set; }

@@ -49,7 +49,11 @@ namespace Desktop.ViewModels
             List<Employees> results2 = AllEmployees.Where((x) => {
                 string fullName = x.FirstName.ToLower() + " " + x.LastName.ToLower();
                 string initials = x.FirstName.ToLower().Substring(0, 2) + x.LastName.ToLower().Substring(0, 2);
-                return !(initials.Contains(searched)) && fullName.Contains(searched);
+                //string region = x.Region==null?"Unknown region" 
+                return !(initials.Contains(searched)) && 
+                (fullName.Contains(searched) ||
+                x.Country.ToLower() == searched ||
+                x.Region.ToLower() == searched);
             }).ToList();
 
             foreach(Employees e in results2)
