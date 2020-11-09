@@ -20,7 +20,7 @@ namespace DataAccess
         {
             using (NorthwindContext context = new NorthwindContext())
             {
-                //context.Entry(employee).State = EntityState.Modified;
+               context.Entry(employee).State = EntityState.Modified;
                 //context.Employees.Update(employee);
                 context.Update<Employees>(employee);
                 context.SaveChanges();

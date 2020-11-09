@@ -1,6 +1,7 @@
-﻿using DataAccess;
+﻿//using DataAccess;
 using Desktop.Commands;
 using Entities.Models;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,10 +12,11 @@ namespace Desktop.ViewModels
 {
     public class HRViewModel : BaseViewModel
     {
+        private DataWebService webService = new DataWebService();
         //private MainViewModel MainView { get; set; }
         public SelectEmployeeCommand UpdateView { get; set; }
         public SearchCommand SearchEmployees { get; set; }
-        private Repository repository = new Repository();
+        //private Repository repository = new Repository();
         private List<Employees> AllEmployees { get; set; }
         private ObservableCollection<Employees> _employeeResults;
         public ObservableCollection<Employees> EmployeeResults
@@ -32,7 +34,7 @@ namespace Desktop.ViewModels
             //MainView = mainView;
             UpdateView = new SelectEmployeeCommand(mainView);
             SearchEmployees = new SearchCommand(Search);
-            AllEmployees = repository.GetAllEmployees();
+            AllEmployees = webService.GetAllEmployees();
             EmployeeResults = new ObservableCollection<Employees>(AllEmployees);
             //Search("an");
         }

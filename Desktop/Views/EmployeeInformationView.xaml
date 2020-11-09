@@ -86,6 +86,10 @@
                     <Label Content="Photo path: " FontSize="16px"/>
                     <TextBox Text="{Binding Employee.PhotoPath, Mode=TwoWay}" TextWrapping="Wrap" VerticalContentAlignment="Center" FontSize="16px"/>
                 </StackPanel>
+                <StackPanel Margin="10">
+                    <Label Content="Reports to: " FontSize="16px"/>
+                    <ComboBox ItemsSource="{Binding AllEmployees}" DisplayMemberPath="FirstName" SelectedItem="{Binding Employee.ReportsToNavigation, Mode=TwoWay}" FontSize="16px"/>
+                </StackPanel>
             </StackPanel>
         </ScrollViewer>
 

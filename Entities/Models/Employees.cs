@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Desktop.Interfaces;
 
 namespace Entities.Models
 {
-    public partial class Employees : ObservableObject
+    public partial class Employees : ObservableObject, IEquatable<Employees>
     {
         public Employees()
         {
@@ -58,5 +59,11 @@ namespace Entities.Models
         public virtual ICollection<EmploymentTime> EmploymentTime { get; set; }
         public virtual ICollection<Employees> InverseReportsToNavigation { get; set; }
         public virtual ICollection<Orders> Orders { get; set; }
+
+        public bool Equals([AllowNull] Employees other)
+        {
+            if (other == null) return false;
+            return EmployeeId == other.EmployeeId;
+        }
     }
 }
