@@ -11,7 +11,7 @@ namespace Api.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
-        Repository repository = new Repository();
+         Repository repository = new Repository();
 
         // GET: api/Employee
         [HttpGet]
