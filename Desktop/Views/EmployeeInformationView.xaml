@@ -109,8 +109,8 @@
         </DockPanel>
         <DataGrid x:Name="timeGrid" ItemsSource="{Binding Employee.EmploymentTime}" AutoGenerateColumns="false" Grid.Row="1">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Start date" Binding="{Binding StartDate}"/>
-                <DataGridTextColumn Header="End date" Binding="{Binding EndDate}"/>
+                <DataGridTextColumn Header="Start date" Binding="{Binding StartDate, StringFormat={}{0:yyyy/MM/dd}}" Width="50*"/>
+                    <DataGridTextColumn Header="End date" Binding="{Binding EndDate, StringFormat={}{0:yyyy/MM/dd}}" Width="50*"/>
             </DataGrid.Columns>
         </DataGrid>
         </Grid>
