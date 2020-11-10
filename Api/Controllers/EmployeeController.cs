@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading.Tasks;
 using DataAccess;
 using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -35,7 +37,7 @@ namespace Api.Controllers
 
         // POST: api/Employee
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post(Employees employee)
         {
         }
 

@@ -21,7 +21,7 @@ namespace Services
 
         public async void SaveEmployee(Employees employee)
         {
-            HttpResponseMessage response = await client.PutAsJsonAsync($"http://localhost:49234/api/Employee/", employee);
+            HttpResponseMessage response = await client.PutAsJsonAsync($"http://localhost:49234/api/Employee/5", employee);
         }
     }
 }
