@@ -1,26 +1,13 @@
-﻿using Newtonsoft.Json;
+﻿using Entities.Models;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Net;
 
 namespace Services
 {
-    public class ValidationWebService
+    public class ValidationWebService : JsonCommands
     {
-        private string GetJson(string url)
-        {
-            string json;
-            using(WebClient wc = new WebClient())
-            {
-                json = wc.DownloadString(url);
-            }
-            return json;
-        }
-
-        //public bool IsEmailValid(string email)
-        //{
-
-        //}
-
         public string ApplyLanguageFilter(string text)
         {
             string url = "https://www.purgomalum.com/service/json?text=" + text;

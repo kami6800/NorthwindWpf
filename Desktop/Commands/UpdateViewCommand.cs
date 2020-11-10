@@ -1,4 +1,4 @@
-﻿using DataAccess;
+﻿//using DataAccess;
 using Desktop.ViewModels;
 using Entities.Models;
 using System;
@@ -10,7 +10,7 @@ namespace Desktop.Commands
 {
     public class UpdateViewCommand : ICommand
     {
-        Repository repository = new Repository();
+        //Repository repository = new Repository();
         public event EventHandler CanExecuteChanged;
         public MainViewModel ViewModel { get; set; }
 
