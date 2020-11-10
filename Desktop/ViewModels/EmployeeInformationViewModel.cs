@@ -4,6 +4,7 @@ using Entities.Models;
 using Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace Desktop.ViewModels
@@ -11,25 +12,43 @@ namespace Desktop.ViewModels
     public class EmployeeInformationViewModel : BaseViewModel
     {
         private DataWebService webService = new DataWebService();
-        //Repository repository = new Repository();
-        public Employees Employee { get; set; }
+        public Employees Employee
+        {
+            get { return _employee; }
+            set
+            {
+                _employee = value;
+                RaisePropertyChanged("Employee");
+            }
+        }
+        private Employees _employee;
         public List<Employees> AllEmployees { get; set; }
         public EmployeeParameterCommand UpdateCommand { get; set; }
+        public ParameterVoidCommand AddEmployeeTimeCommand { get; set; }
         //public Employees Boss { get; set; }
+
+            public ObservableCollection<EmploymentTime> EmploymentTimes { get; set; }
 
         public EmployeeInformationViewModel(Employees employee)
         {
             Employee = employee;
-            UpdateCommand = new EmployeeParameterCommand(UpdateEmployee);
             AllEmployees = webService.GetAllEmployees();
-
-            //Boss = new Employees();
-            //Boss.FirstName = "theboss";
+            EmploymentTimes = new ObservableCollection<EmploymentTime>(Employee.EmploymentTime);
+            UpdateCommand = new EmployeeParameterCommand(UpdateEmployee);
+            AddEmployeeTimeCommand = new ParameterVoidCommand(AddEmptyEmployeeTime);
         }
 
         public void UpdateEmployee(Employees employee)
         {
+            employee.EmploymentTime = EmploymentTimes;
             webService.SaveEmployee(employee);
+        }
+
+        public void AddEmptyEmployeeTime()
+        {
+            EmploymentTime empty = new EmploymentTime();
+            empty.StartDate = DateTime.Now;
+            EmploymentTimes.Add(empty);
         }
     }
 }
