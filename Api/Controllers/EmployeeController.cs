@@ -45,7 +45,7 @@ namespace Api.Controllers
         [HttpPut("{employee}")]
         public void Put(Employees employee/*, [FromBody]string s/*, [FromBody]Employees employee*/)
         {
-            repository.SaveEmployee(employee);
+            repository.UpdateEmployee(employee);
         }
 
         // DELETE: api/ApiWithActions/5
