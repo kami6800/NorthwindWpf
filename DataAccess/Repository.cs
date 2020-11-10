@@ -16,7 +16,7 @@ namespace DataAccess
         {
             using (NorthwindContext context = new NorthwindContext())
             {
-                return context.Employees.ToList();
+                return context.Employees.Include(x=>x.EmploymentTime).ToList();
             }
         }
 

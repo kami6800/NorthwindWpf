@@ -12,10 +12,10 @@
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="40*"/>
             <ColumnDefinition Width="60*"/>
+            <ColumnDefinition Width="40*"/>
         </Grid.ColumnDefinitions>
-        <ScrollViewer Grid.ColumnSpan="2">
+        <ScrollViewer>
         <StackPanel>
             <DockPanel>
                 <StackPanel Margin="10">
@@ -92,6 +92,28 @@
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="80*"/>
+            </Grid.RowDefinitions>
+            <DockPanel >
+            <StackPanel>
+                <Label Content="Start: " FontSize="16px"/>
+                <DatePicker SelectedDate="{Binding ElementName=timeGrid, Path=SelectedItem.StartDate}" VerticalContentAlignment="Center" FontSize="16px"/>
+            </StackPanel>
+            <StackPanel>
+                <Label Content="End: " FontSize="16px"/>
+                <DatePicker SelectedDate="{Binding ElementName=timeGrid, Path=SelectedItem.EndDate}" VerticalContentAlignment="Center" FontSize="16px"/>
+            </StackPanel>
+        </DockPanel>
+        <DataGrid x:Name="timeGrid" ItemsSource="{Binding Employee.EmploymentTime}" AutoGenerateColumns="false" Grid.Row="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Start date" Binding="{Binding StartDate}"/>
+                <DataGridTextColumn Header="End date" Binding="{Binding EndDate}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        </Grid>
 
         <Button Command="{Binding UpdateCommand}" CommandParameter="{Binding Employee}" Content="Save" FontSize="20" Width="80px" Height="40px" Grid.Row="1" Grid.ColumnSpan="2"/>
     </Grid>
