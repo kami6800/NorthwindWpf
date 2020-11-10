@@ -11,6 +11,7 @@ namespace Desktop.ViewModels
 {
     public class EmployeeInformationViewModel : BaseViewModel
     {
+        private MainViewModel mainViewModel;
         private DataWebService webService = new DataWebService();
         public Employees Employee
         {
@@ -29,11 +30,12 @@ namespace Desktop.ViewModels
 
             public ObservableCollection<EmploymentTime> EmploymentTimes { get; set; }
 
-        public EmployeeInformationViewModel(Employees employee)
+        public EmployeeInformationViewModel(Employees employee, MainViewModel mainVM)
         {
             Employee = employee;
             AllEmployees = webService.GetAllEmployees();
             EmploymentTimes = new ObservableCollection<EmploymentTime>(Employee.EmploymentTime);
+            mainViewModel = mainVM;
             UpdateCommand = new EmployeeParameterCommand(UpdateEmployee);
             AddEmployeeTimeCommand = new ParameterVoidCommand(AddEmptyEmployeeTime);
         }
@@ -42,6 +44,7 @@ namespace Desktop.ViewModels
         {
             employee.EmploymentTime = EmploymentTimes;
             webService.SaveEmployee(employee);
+            mainViewModel.SelectedViewModel = new HRViewModel(mainViewModel);
         }
 
         public void AddEmptyEmployeeTime()

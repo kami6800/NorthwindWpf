@@ -27,7 +27,7 @@ namespace Desktop.Commands
         public void Execute(object parameter)
         {
             Employees employee = parameter as Employees;
-            ViewModel.SelectedViewModel = new EmployeeInformationViewModel(employee);
+            ViewModel.SelectedViewModel = new EmployeeInformationViewModel(employee, ViewModel);
         }
     }
 }
