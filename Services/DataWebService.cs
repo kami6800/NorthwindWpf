@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Net.Http.Formatting;
+using System.Threading.Tasks;
 
 namespace Services
 {
@@ -19,7 +20,7 @@ namespace Services
             return employees;
         }
 
-        public async void SaveEmployee(Employees employee)
+        public async Task SaveEmployee(Employees employee)
         {
             HttpResponseMessage response = await client.PutAsJsonAsync($"http://localhost:49234/api/Employee/5", employee);
         }

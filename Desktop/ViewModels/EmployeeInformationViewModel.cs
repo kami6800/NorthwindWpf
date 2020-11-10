@@ -13,6 +13,7 @@ namespace Desktop.ViewModels
     {
         private MainViewModel mainViewModel;
         private DataWebService webService = new DataWebService();
+        private ValidationWebService validation = new ValidationWebService();
         public Employees Employee
         {
             get { return _employee; }
@@ -40,10 +41,12 @@ namespace Desktop.ViewModels
             AddEmployeeTimeCommand = new ParameterVoidCommand(AddEmptyEmployeeTime);
         }
 
-        public void UpdateEmployee(Employees employee)
+        public async void UpdateEmployee(Employees employee)
         {
             employee.EmploymentTime = EmploymentTimes;
-            webService.SaveEmployee(employee);
+            employee.Notes = validation.ApplyLanguageFilter(employee.Notes);
+
+            await webService.SaveEmployee(employee);
             mainViewModel.SelectedViewModel = new HRViewModel(mainViewModel);
         }
 
