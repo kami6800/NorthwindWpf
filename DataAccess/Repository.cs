@@ -22,9 +22,16 @@ namespace DataAccess
 
         public List<Customers> GetAllCustomers()
         {
-            using(NorthwindContext context = new NorthwindContext())
+            //using(NorthwindContext context = new NorthwindContext())
+            //{
+            //    return context.Customers.Include(x => x.Orders).ToList();
+            //}
+
+            using (NorthwindContext context = new NorthwindContext())
             {
-                return context.Customers.Include(x => x.Orders).ToList();
+                return context.Customers
+                    .Include(x => x.Orders).ThenInclude(x => x.OrderDetails)//.ThenInclude(x => x.Product)
+                    .ToList();
             }
         }
 
