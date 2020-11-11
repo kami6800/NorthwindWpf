@@ -15,17 +15,25 @@
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
         <DockPanel Margin="5">
-            <Button Command="{Binding SearchCustomersCommand}" CommandParameter="{Binding ElementName=searchBox, Path=Text}" Content="Search" Padding="10 0" FontSize="16" DockPanel.Dock="Right"/>
+            <Button Command="{Binding SearchEmployees}" CommandParameter="{Binding ElementName=searchBox, Path=Text}" Content="Search" Padding="10 0" FontSize="16" DockPanel.Dock="Right"/>
             <TextBox x:Name="searchBox" FontSize="16" VerticalContentAlignment="Center"/>
         </DockPanel>
-        <DataGrid x:Name="searchGrid" ItemsSource="{Binding CustomerResults}" IsReadOnly="true" AutoGenerateColumns="False" Grid.Row="1">
+        <DataGrid x:Name="searchGrid" ItemsSource="{Binding EmployeeResults}" IsReadOnly="true" AutoGenerateColumns="False" Grid.Row="1">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding CustomerId}" Width="10*"/>
-                <DataGridTextColumn Header="Company name" Binding="{Binding CompanyName}" Width="35*"/>
-                <DataGridTextColumn Header="Contact name" Binding="{Binding ContactName}" Width="35*"/>
-                <DataGridTextColumn Header="Country" Binding="{Binding Country}" Width="20*"/>
+                <DataGridTextColumn Header="ID" Binding="{Binding EmployeeId}" Width="5*"/>
+                <DataGridTextColumn Header="Full name" Width="35*">
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding StringFormat="{}{0} {1}">
+                            <Binding Path="FirstName"/>
+                            <Binding Path="LastName"/>
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="30*"/>
+                <DataGridTextColumn Header="Country" Binding="{Binding Country}" Width="25*"/>
+                <DataGridTextColumn Header="Region" Binding="{Binding Region}" Width="15*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Command="{Binding SelectCommand}" CommandParameter="{Binding ElementName=searchGrid, Path=SelectedItem}" Content="Select" FontSize="16" Height="40px" Width="100px" Grid.Row="2"/>
+        <Button Command="{Binding UpdateView}" CommandParameter="{Binding ElementName=searchGrid, Path=SelectedItem}" Content="Select" FontSize="16" Height="40px" Width="100px" Grid.Row="2"/>
     </Grid>
 </UserControl>
