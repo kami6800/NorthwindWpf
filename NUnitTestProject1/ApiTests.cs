@@ -30,5 +30,16 @@ namespace NUnitTestProject1
 
             Assert.IsTrue(result.Count() > 0);
         }
+
+        [Test]
+        public void GetOrdersByCustomerTest()
+        {
+            OrderController controller = new OrderController();
+            string customerId = "ALFKI";
+
+            string result = controller.Get(customerId);
+
+            Assert.IsTrue(result.Count() > 0);
+        }
     }
 }

@@ -35,6 +35,17 @@ namespace DataAccess
             }
         }
 
+        public List<Orders> GetOrdersByCustomer(string customerId)
+        {
+            using(NorthwindContext context = new NorthwindContext())
+            {
+                return context.Orders
+                    .Include(x => x.OrderDetails).ThenInclude(x => x.Product)
+                    .Where(x => x.CustomerId == customerId)
+                    .ToList();
+            }
+        }
+
         /// <summary>
         /// Update an employee to database
         /// </summary>
