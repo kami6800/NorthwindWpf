@@ -14,6 +14,8 @@ namespace Desktop.ViewModels
         private MainViewModel mainViewModel;
         private DataWebService webService = new DataWebService();
         private ValidationWebService validation = new ValidationWebService();
+        public EmployeeParameterCommand UpdateCommand { get; set; }
+        public ParameterVoidCommand AddEmployeeTimeCommand { get; set; }
         public Employees Employee
         {
             get { return _employee; }
@@ -25,11 +27,17 @@ namespace Desktop.ViewModels
         }
         private Employees _employee;
         public List<Employees> AllEmployees { get; set; }
-        public EmployeeParameterCommand UpdateCommand { get; set; }
-        public ParameterVoidCommand AddEmployeeTimeCommand { get; set; }
-        //public Employees Boss { get; set; }
-
-            public ObservableCollection<EmploymentTime> EmploymentTimes { get; set; }
+        public ObservableCollection<EmploymentTime> EmploymentTimes { get; set; }
+        public string ErrorMessage
+        {
+            get { return _errorMessage; }
+            set 
+            { 
+                _errorMessage = value;
+                RaisePropertyChanged("ErrorMessage");
+            }
+        }
+        private string _errorMessage;
 
         public EmployeeInformationViewModel(Employees employee, MainViewModel mainVM)
         {
@@ -37,17 +45,28 @@ namespace Desktop.ViewModels
             AllEmployees = webService.GetAllEmployees();
             EmploymentTimes = new ObservableCollection<EmploymentTime>(Employee.EmploymentTime);
             mainViewModel = mainVM;
+            ErrorMessage = "";
             UpdateCommand = new EmployeeParameterCommand(UpdateEmployee);
             AddEmployeeTimeCommand = new ParameterVoidCommand(AddEmptyEmployeeTime);
         }
 
         public async void UpdateEmployee(Employees employee)
         {
+            ErrorMessage = "Saving...";
+
             employee.EmploymentTime = EmploymentTimes;
             employee.Notes = validation.ApplyLanguageFilter(employee.Notes);
+            bool validPhoneNumber = validation.ValidPhoneNumber(employee.HomePhone);
 
-            await webService.SaveEmployee(employee);
-            mainViewModel.SelectedViewModel = new HRViewModel(mainViewModel);
+            if (!validPhoneNumber)
+            {
+                ErrorMessage = "Invalid phone number";
+            }
+            else
+            {
+                await webService.SaveEmployee(employee);
+                mainViewModel.SelectedViewModel = new HRViewModel(mainViewModel);
+            }
         }
 
         public void AddEmptyEmployeeTime()
