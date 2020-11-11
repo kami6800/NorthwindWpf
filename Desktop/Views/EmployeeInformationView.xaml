@@ -70,7 +70,7 @@
 
                 <DockPanel>
                     <StackPanel Margin="10">
-                        <Label Content="Last name: " FontSize="16px"/>
+                        <Label Content="Extension: " FontSize="16px"/>
                         <TextBox Text="{Binding Employee.Extension, Mode=TwoWay}" VerticalContentAlignment="Center" FontSize="16px"/>
                     </StackPanel>
                     <StackPanel Margin="10">
