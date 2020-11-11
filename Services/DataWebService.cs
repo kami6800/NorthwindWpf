@@ -28,6 +28,14 @@ namespace Services
             return customers;
         }
 
+        public List<Orders> GetOrdersByCustomer(string customerId)
+        {
+            string url = "http://localhost:49234/api/Order/" + customerId;
+            string json = GetJson(url);
+            List<Orders> orders = JsonConvert.DeserializeObject<List<Orders>>(json);
+            return orders;
+        }
+
         public async Task SaveEmployee(Employees employee)
         {
             HttpResponseMessage response = await client.PutAsJsonAsync($"http://localhost:49234/api/Employee/5", employee);

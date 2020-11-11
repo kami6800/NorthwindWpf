@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.Models
 {
@@ -13,5 +14,11 @@ namespace Entities.Models
 
         public virtual Orders Order { get; set; }
         public virtual Products Product { get; set; }
+
+        [NotMapped]
+        public decimal TotalPrice
+        {
+            get{ return Quantity * UnitPrice; }
+        }
     }
 }

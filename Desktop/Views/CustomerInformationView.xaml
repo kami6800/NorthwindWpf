@@ -7,6 +7,39 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="30*"/>
+            <ColumnDefinition Width="50*"/>
+        </Grid.ColumnDefinitions>
+
+        <DataGrid x:Name="ordersGrid" ItemsSource="{Binding SelectedOrders}" AutoGenerateColumns="false">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Order ID" Binding="{Binding OrderId}" Width="100*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Column="1">
+            <StackPanel Margin="20">
+                <Label Content="Order date: "/>
+                <Label Content="{Binding ElementName=ordersGrid, Path=SelectedItem.OrderDate}" FontSize="18"/>
+            </StackPanel>
+            <StackPanel Margin="20">
+                <Label Content="Required date: "/>
+                <Label Content="{Binding ElementName=ordersGrid, Path=SelectedItem.RequiredDate}" FontSize="18"/>
+            </StackPanel>
+            <StackPanel Margin="20">
+                <Label Content="Shipped date: "/>
+                <Label Content="{Binding ElementName=ordersGrid, Path=SelectedItem.ShippedDate}" FontSize="18"/>
+            </StackPanel>
+        </StackPanel>
+
+        <DataGrid ItemsSource="{Binding ElementName=ordersGrid, Path=SelectedItem.OrderDetails}" AutoGenerateColumns="false" Grid.Column="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Product" Binding="{Binding Product.ProductName}" Width="50*"/>
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="20*"/>
+                <DataGridTextColumn Header="Total price" Binding="{Binding TotalPrice}" Width="30*"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

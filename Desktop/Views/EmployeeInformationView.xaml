@@ -115,8 +115,8 @@
                 </DataGrid.Columns>
             </DataGrid>
             <UniformGrid Columns="2" Grid.Row="2">
-                <Button Content="Add" Command="{Binding AddEmployeeTimeCommand}"/>
-                <Button Content="Remove"/>
+                <Button Content="Add" Command="{Binding AddEmployeeTimeCommand}" Width="60" Height="40" FontSize="18"/>
+                <!--<Button Content="Remove"/>-->
             </UniformGrid>
         </Grid>
         <Label Content="{Binding ErrorMessage}" Foreground="Red" Grid.Row="1"/>

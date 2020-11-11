@@ -3,13 +3,8 @@ using Services;
 
 namespace NUnitTestProject1
 {
-    public class Tests
+    public class ServiceTests
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
         [Test]
         public void LanguageFilterTest()
         {
