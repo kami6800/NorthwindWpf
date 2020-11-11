@@ -4,32 +4,76 @@ using Entities.Models;
 using Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace Desktop.ViewModels
 {
     public class EmployeeInformationViewModel : BaseViewModel
     {
+        private MainViewModel mainViewModel;
         private DataWebService webService = new DataWebService();
-        //Repository repository = new Repository();
-        public Employees Employee { get; set; }
-        public List<Employees> AllEmployees { get; set; }
+        private ValidationWebService validation = new ValidationWebService();
         public EmployeeParameterCommand UpdateCommand { get; set; }
-        //public Employees Boss { get; set; }
+        public ParameterVoidCommand AddEmployeeTimeCommand { get; set; }
+        public Employees Employee
+        {
+            get { return _employee; }
+            set
+            {
+                _employee = value;
+                RaisePropertyChanged("Employee");
+            }
+        }
+        private Employees _employee;
+        public List<Employees> AllEmployees { get; set; }
+        public ObservableCollection<EmploymentTime> EmploymentTimes { get; set; }
+        public string ErrorMessage
+        {
+            get { return _errorMessage; }
+            set 
+            { 
+                _errorMessage = value;
+                RaisePropertyChanged("ErrorMessage");
+            }
+        }
+        private string _errorMessage;
 
-        public EmployeeInformationViewModel(Employees employee)
+        public EmployeeInformationViewModel(Employees employee, MainViewModel mainVM)
         {
             Employee = employee;
-            UpdateCommand = new EmployeeParameterCommand(UpdateEmployee);
             AllEmployees = webService.GetAllEmployees();
-
-            //Boss = new Employees();
-            //Boss.FirstName = "theboss";
+            EmploymentTimes = new ObservableCollection<EmploymentTime>(Employee.EmploymentTime);
+            mainViewModel = mainVM;
+            ErrorMessage = "";
+            UpdateCommand = new EmployeeParameterCommand(UpdateEmployee);
+            AddEmployeeTimeCommand = new ParameterVoidCommand(AddEmptyEmployeeTime);
         }
 
-        public void UpdateEmployee(Employees employee)
+        public async void UpdateEmployee(Employees employee)
         {
-            webService.SaveEmployee(employee);
+            ErrorMessage = "Saving...";
+
+            employee.EmploymentTime = EmploymentTimes;
+            employee.Notes = validation.ApplyLanguageFilter(employee.Notes);
+            bool validPhoneNumber = validation.ValidPhoneNumber(employee.HomePhone);
+
+            if (!validPhoneNumber)
+            {
+                ErrorMessage = "Invalid phone number";
+            }
+            else
+            {
+                await webService.SaveEmployee(employee);
+                mainViewModel.SelectedViewModel = new HRViewModel(mainViewModel);
+            }
+        }
+
+        public void AddEmptyEmployeeTime()
+        {
+            EmploymentTime empty = new EmploymentTime();
+            empty.StartDate = DateTime.Now;
+            EmploymentTimes.Add(empty);
         }
     }
 }

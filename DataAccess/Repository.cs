@@ -16,7 +16,7 @@ namespace DataAccess
         {
             using (NorthwindContext context = new NorthwindContext())
             {
-                return context.Employees.ToList();
+                return context.Employees.Include(x=>x.EmploymentTime).ToList();
             }
         }
 
@@ -27,12 +27,20 @@ namespace DataAccess
         public void UpdateEmployee(Employees employee)
         {
             //Edits ReportsTo to match reportsToNavigation
-            employee.ReportsTo = employee.ReportsToNavigation.EmployeeId;
+            if(employee.ReportsToNavigation!=null)
+                employee.ReportsTo = employee.ReportsToNavigation.EmployeeId;
+
             using (NorthwindContext context = new NorthwindContext())
             {
                context.Entry(employee).State = EntityState.Modified;
                 //context.Employees.Update(employee);
                 context.Update<Employees>(employee);
+
+                //Loops through each EmploymentTime record to make sure they're saved alongside the employee
+                foreach(EmploymentTime e in employee.EmploymentTime)
+                {
+                    context.EmploymentTime.Update(e);
+                }
                 context.SaveChanges();
             }
         }

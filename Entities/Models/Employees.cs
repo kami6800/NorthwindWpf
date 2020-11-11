@@ -56,7 +56,17 @@ namespace Entities.Models
 
         public virtual Employees ReportsToNavigation { get; set; }
         public virtual ICollection<EmployeeTerritories> EmployeeTerritories { get; set; }
-        public virtual ICollection<EmploymentTime> EmploymentTime { get; set; }
+        public virtual ICollection<EmploymentTime> EmploymentTime
+        {
+            get { return _employmentTime; }
+            set
+            {
+                _employmentTime = value;
+                RaisePropertyChanged("EmploymentTime");
+            }
+        }
+        private ICollection<EmploymentTime> _employmentTime { get; set; }
+
         public virtual ICollection<Employees> InverseReportsToNavigation { get; set; }
         public virtual ICollection<Orders> Orders { get; set; }
 
