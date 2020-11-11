@@ -12,6 +12,18 @@
         <DataTemplate DataType="{x:Type viewmodel:OrdersViewModel}">
             <view:OrdersView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:AccountingViewModel}">
+            <view:AccountingView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:CustomersViewModel}">
+            <view:CustomersView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:ProductsViewModel}">
+            <view:ProductsView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:SuppliersViewModel}">
+            <view:SuppliersView/>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type viewmodel:EmployeeInformationViewModel}">
             <view:EmployeeInformationView/>
         </DataTemplate>

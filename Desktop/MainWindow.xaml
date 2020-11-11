@@ -14,10 +14,10 @@
         <StackPanel Background="LightSteelBlue">
             <Button Command="{Binding UpdateView}" CommandParameter="HR" Content="HR" Margin="10" Padding="3" Background="LightBlue" FontSize="16" BorderThickness="2px" BorderBrush="AliceBlue"/>
             <Button Command="{Binding UpdateView}" CommandParameter="Orders" Content="Orders" Margin="10" Padding="3" Background="LightBlue" FontSize="16" BorderThickness="2px" BorderBrush="AliceBlue"/>
-            <Button Content="Products" Margin="10" Padding="3" Background="LightBlue" FontSize="16" BorderThickness="2px" BorderBrush="AliceBlue"/>
-            <Button Content="Customers" Margin="10" Padding="3" Background="LightBlue" FontSize="16" BorderThickness="2px" BorderBrush="AliceBlue"/>
-            <Button Content="Suppliers" Margin="10" Padding="3" Background="LightBlue" FontSize="16" BorderThickness="2px" BorderBrush="AliceBlue"/>
-            <Button Content="Accounting" Margin="10" Padding="3" Background="LightBlue" FontSize="16" BorderThickness="2px" BorderBrush="AliceBlue"/>
+            <Button Command="{Binding UpdateView}" CommandParameter="Products" Content="Products" Margin="10" Padding="3" Background="LightBlue" FontSize="16" BorderThickness="2px" BorderBrush="AliceBlue"/>
+            <Button Command="{Binding UpdateView}" CommandParameter="Customers" Content="Customers" Margin="10" Padding="3" Background="LightBlue" FontSize="16" BorderThickness="2px" BorderBrush="AliceBlue"/>
+            <Button Command="{Binding UpdateView}" CommandParameter="Suppliers" Content="Suppliers" Margin="10" Padding="3" Background="LightBlue" FontSize="16" BorderThickness="2px" BorderBrush="AliceBlue"/>
+            <Button Command="{Binding UpdateView}" CommandParameter="Accounting" Content="Accounting" Margin="10" Padding="3" Background="LightBlue" FontSize="16" BorderThickness="2px" BorderBrush="AliceBlue"/>
         </StackPanel>
 
         <ContentControl Content="{Binding SelectedViewModel}" Grid.Column="1"/>

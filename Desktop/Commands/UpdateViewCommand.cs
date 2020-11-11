@@ -34,6 +34,18 @@ namespace Desktop.Commands
                 case "Orders":
                     ViewModel.SelectedViewModel = new OrdersViewModel();
                     break;
+                case "Accounting":
+                    ViewModel.SelectedViewModel = new AccountingViewModel();
+                    break;
+                case "Customers":
+                    ViewModel.SelectedViewModel = new CustomersViewModel();
+                    break;
+                case "Products":
+                    ViewModel.SelectedViewModel = new ProductsViewModel();
+                    break;
+                case "Suppliers":
+                    ViewModel.SelectedViewModel = new SuppliersViewModel();
+                    break;
             }
         }
     }
