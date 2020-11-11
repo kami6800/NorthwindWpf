@@ -38,7 +38,7 @@ namespace Desktop.Commands
                     ViewModel.SelectedViewModel = new AccountingViewModel();
                     break;
                 case "Customers":
-                    ViewModel.SelectedViewModel = new CustomersViewModel();
+                    ViewModel.SelectedViewModel = new CustomersViewModel(ViewModel);
                     break;
                 case "Products":
                     ViewModel.SelectedViewModel = new ProductsViewModel();
