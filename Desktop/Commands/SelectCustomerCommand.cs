@@ -1,5 +1,4 @@
-﻿//using DataAccess;
-using Desktop.ViewModels;
+﻿using Desktop.ViewModels;
 using Entities.Models;
 using System;
 using System.Collections.Generic;
@@ -8,12 +7,13 @@ using System.Windows.Input;
 
 namespace Desktop.Commands
 {
-    public class SelectEmployeeCommand : ICommand
+    public class SelectCustomerCommand : ICommand
     {
+        //Repository repository = new Repository();
         public event EventHandler CanExecuteChanged;
         public MainViewModel ViewModel { get; set; }
 
-        public SelectEmployeeCommand(MainViewModel mainViewModel)
+        public SelectCustomerCommand(MainViewModel mainViewModel)
         {
             ViewModel = mainViewModel;
         }
@@ -25,8 +25,8 @@ namespace Desktop.Commands
 
         public void Execute(object parameter)
         {
-            Employees employee = parameter as Employees;
-            ViewModel.SelectedViewModel = new EmployeeInformationViewModel(employee, ViewModel);
+            Customers customer = parameter as Customers;
+            ViewModel.SelectedViewModel = new CustomerInformationViewModel(customer, ViewModel);
         }
     }
 }

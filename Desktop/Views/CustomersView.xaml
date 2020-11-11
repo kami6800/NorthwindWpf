@@ -7,6 +7,33 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="80*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <DockPanel Margin="5">
+            <Button Command="{Binding SearchEmployees}" CommandParameter="{Binding ElementName=searchBox, Path=Text}" Content="Search" Padding="10 0" FontSize="16" DockPanel.Dock="Right"/>
+            <TextBox x:Name="searchBox" FontSize="16" VerticalContentAlignment="Center"/>
+        </DockPanel>
+        <DataGrid x:Name="searchGrid" ItemsSource="{Binding EmployeeResults}" IsReadOnly="true" AutoGenerateColumns="False" Grid.Row="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding EmployeeId}" Width="5*"/>
+                <DataGridTextColumn Header="Full name" Width="35*">
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding StringFormat="{}{0} {1}">
+                            <Binding Path="FirstName"/>
+                            <Binding Path="LastName"/>
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="30*"/>
+                <DataGridTextColumn Header="Country" Binding="{Binding Country}" Width="25*"/>
+                <DataGridTextColumn Header="Region" Binding="{Binding Region}" Width="15*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Command="{Binding UpdateView}" CommandParameter="{Binding ElementName=searchGrid, Path=SelectedItem}" Content="Select" FontSize="16" Height="40px" Width="100px" Grid.Row="2"/>
     </Grid>
 </UserControl>

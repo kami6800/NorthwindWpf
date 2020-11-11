@@ -20,6 +20,14 @@ namespace Services
             return employees;
         }
 
+        public List<Customers> GetAllCustomers()
+        {
+            string url = "http://localhost:49234/api/Customer";
+            string json = GetJson(url);
+            List<Customers> customers = JsonConvert.DeserializeObject<List<Customers>>(json);
+            return customers;
+        }
+
         public async Task SaveEmployee(Employees employee)
         {
             HttpResponseMessage response = await client.PutAsJsonAsync($"http://localhost:49234/api/Employee/5", employee);

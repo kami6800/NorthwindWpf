@@ -20,6 +20,14 @@ namespace DataAccess
             }
         }
 
+        public List<Customers> GetAllCustomers()
+        {
+            using(NorthwindContext context = new NorthwindContext())
+            {
+                return context.Customers.Include(x => x.Orders).ToList();
+            }
+        }
+
         /// <summary>
         /// Update an employee to database
         /// </summary>
